@@ -1,12 +1,14 @@
 
 package cliente;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import javax.swing.JOptionPane;
 /**
  *
  * @author mmoureperez
@@ -31,9 +33,30 @@ public class Cliente {
 			OutputStream os= clienteSocket.getOutputStream();
 
 			System.out.println("Enviando mensaje");
+                        
+                        DataOutputStream salidaServidor = new DataOutputStream(clienteSocket.getOutputStream());
 
-			String num1="mensaje desde el cliente";
-			os.write(num1.getBytes());
+                int num1=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el primer numero"));
+                int oper=Integer.parseInt(JOptionPane.showInputDialog("Introduzca la operación:\n0= +\n1= -\n2= x\n3= /"));
+                int num2=Integer.parseInt(JOptionPane.showInputDialog("Introduzca el segundo numero"));
+                
+                
+                //Se escribe en el servidor usando su flujo de datos
+                salidaServidor.write(num1);  
+                salidaServidor.write(num2); 
+                salidaServidor.write(oper);
+                System.out.println(oper);
+                /*
+                0==suma
+                1==resta
+                2==multiplicacion
+                3==division
+                */
+                       
+
+
+			
+                        
 
 			System.out.println("Mensaje enviado");
 
