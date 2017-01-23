@@ -43,7 +43,7 @@ public class Cliente extends Thread {
             //Se escribe en el servidor usando su flujo de datos
             salidaServidor.write(num1);
             salidaServidor.write(num2);
-            salidaServidor.write(oper);
+            salidaServidor.write(oper); 
             /*
             0==suma
             1==resta
