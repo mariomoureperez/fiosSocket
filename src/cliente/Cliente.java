@@ -1,10 +1,10 @@
 
 package cliente;
 
+import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,8 +27,8 @@ public class Cliente extends Thread {
             System.out.println("Estableciendo la conexion");
 
             //Flujo para recibir los datos del servidor
-            InputStream is = clienteSocket.getInputStream();
-           
+           // InputStream is = clienteSocket.getInputStream();
+            BufferedReader is = new BufferedReader(new InputStreamReader(clienteSocket.getInputStream()));
 
             System.out.println("Enviando mensaje");
             //Flujo para enviar los datos al servidor 
@@ -42,7 +42,7 @@ public class Cliente extends Thread {
             salidaServidor.write(num1);
             salidaServidor.write(num2);
             salidaServidor.write(oper); 
-            /*
+           /*
             0==suma
             1==resta
             2==multiplicacion
@@ -50,7 +50,8 @@ public class Cliente extends Thread {
             */
             System.out.println("Mensaje enviado");
             //leemos el resultado enviado por el servidor
-            System.out.println("resultado de la operacion: " + is.read());
+            System.out.println("resultado de la operacion: " + is.readLine());
+          
 
             System.out.println("Cerrando el socket cliente");
             //cerramos conexión
